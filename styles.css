@@ -1,0 +1,247 @@
+:root {
+  --font-family: 'Roboto', sans-serif;
+  /* Light theme variables */
+  --bg-color: #f9fafb;
+  --primary-color: #1976d2;
+  --text-color: #212121;
+  --input-bg: #fff;
+  --input-border: #90caf9;
+  --button-bg: #1976d2;
+  --button-hover-bg: #115293;
+  --task-bg: #e3f2fd;
+  --task-text-completed: #888;
+  --footer-bg: #e0e0e0;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --primary-color: #90caf9;
+  --text-color: #e0e0e0;
+  --input-bg: #1e1e1e;
+  --input-border: #90caf9;
+  --button-bg: #90caf9;
+  --button-hover-bg: #1976d2;
+  --task-bg: #263238;
+  --task-text-completed: #b0bec5;
+  --footer-bg: #1a1a1a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  margin: 0;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+header {
+  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1567&q=80');
+  background-size: cover;
+  background-position: center;
+  padding: 1.8rem;
+  box-shadow: inset 0 0 7px rgba(0,0,0,0.3);
+  color: white;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.header-container {
+  max-width: 1024px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.8rem;
+  gap: 12px;
+}
+
+.logo i {
+  font-size: 2.4rem;
+  color: var(--primary-color);
+}
+
+#themeToggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: color 0.25s;
+}
+
+#themeToggle:hover {
+  color: var(--primary-color);
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.app-container {
+  background: var(--input-bg);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 480px;
+  transition: background-color 0.3s;
+}
+
+.input-group {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.4rem;
+}
+
+input[type="text"] {
+  flex-grow: 1;
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  border: 2px solid var(--input-border);
+  outline: none;
+  background: var(--input-bg);
+  color: var(--text-color);
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px var(--primary-color);
+}
+
+button {
+  padding: 0.75rem 1.6rem;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--button-bg);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover:not(#themeToggle) {
+  background-color: var(--button-hover-bg);
+}
+
+#taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  background-color: var(--task-bg);
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(33, 150, 243, 0.12);
+  transition: background-color 0.3s;
+  position: relative;
+}
+
+.todo.completed .task-text {
+  text-decoration: line-through;
+  color: var(--task-text-completed);
+}
+
+.task-text {
+  flex-grow: 1;
+  margin-left: 0.6rem;
+  outline: none;
+}
+
+/* Container for buttons that are hidden normally */
+.buttons {
+  display: flex;
+  gap: 0.6rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Show buttons on todo hover */
+.todo:hover .buttons {
+  opacity: 1;
+  visibility: visible;
+}
+
+button.edit, button.delete {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  font-size: 1.3rem;
+  border-radius: 6px;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+button.edit:hover {
+  background-color: rgba(25, 118, 210, 0.2);
+  color: #0b47a1;
+}
+
+button.delete:hover {
+  background-color: rgba(229, 57, 53, 0.2);
+  color: #b71c1c;
+}
+
+/* Checkbox style */
+.complete {
+  cursor: pointer;
+  font-size: 1.3rem;
+  accent-color: var(--primary-color);
+}
+
+footer {
+  background-color: var(--footer-bg);
+  text-align: center;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 20px 20px 0 0;
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+@media (max-width: 500px) {
+  .app-container {
+    padding: 1.2rem 1rem;
+  }
+  input[type="text"] {
+    font-size: 1rem;
+  }
+  button {
+    font-size: 0.9rem;
+  }
+  .logo {
+    font-size: 1.4rem;
+  }
+  .logo i {
+    font-size: 1.8rem;
+  }
+}
